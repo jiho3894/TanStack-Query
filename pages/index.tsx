@@ -45,7 +45,7 @@ export default Home;
 
 export const getStaticProps = async () => {
   try {
-    await queryClient.fetchQuery(["profile"], getProfile);
+    await queryClient.prefetchQuery(["profile"], getProfile);
     return {
       props: {
         dehydratedState: dehydrate(queryClient),

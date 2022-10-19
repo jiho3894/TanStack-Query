@@ -59,9 +59,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: PageProps) => {
-  console.log(context);
   try {
-    await queryClient.fetchQuery(["profile", context.params.profile], () =>
+    await queryClient.prefetchQuery(["profile", context.params.profile], () =>
       getProfileDetail(context.params.profile)
     );
     return {
