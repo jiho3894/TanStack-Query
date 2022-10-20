@@ -11,7 +11,16 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
 import { useLoading } from "../hooks/useLoading";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: false,
+      cacheTime: 1000 * 60 * 60 * 24 * 7,
+    },
+  },
+});
 
 function MyApp({
   Component,

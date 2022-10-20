@@ -21,7 +21,13 @@ const Home: NextPage = () => {
       <ProfileWrapper>
         {List?.map((data) => {
           return (
-            <Link key={data.id} href={`/${data.id}`}>
+            <Link
+              key={data.id}
+              href={{
+                pathname: `/${data.id}`,
+                query: { name: data.name },
+              }}
+            >
               <ProfileBox>
                 <span>{data.name}</span>
                 <Image

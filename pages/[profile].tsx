@@ -35,6 +35,8 @@ const Profile = () => {
           width={256}
           height={256}
           layout="fixed"
+          placeholder="blur"
+          blurDataURL={MyInfo.avatar}
         />
         <span>{MyInfo.name}</span>
       </InfoWrapper>
@@ -45,20 +47,14 @@ const Profile = () => {
 export default Profile;
 
 export const getStaticPaths = async () => {
-  const res = await instance.get("/profile");
   return {
-    paths: res.data.map((data: ProfileProps) => {
-      return {
-        params: {
-          profile: data.id,
-        },
-      };
-    }),
-    fallback: false,
+    paths: [],
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps = async (context: PageProps) => {
+  console.log(context);
   try {
     await queryClient.prefetchQuery(["profile", context.params.profile], () =>
       getProfileDetail(context.params.profile)
@@ -67,6 +63,7 @@ export const getStaticProps = async (context: PageProps) => {
       props: {
         dehydratedState: dehydrate(queryClient),
       },
+      revalidate: 10,
     };
   } catch (error) {
     return {
