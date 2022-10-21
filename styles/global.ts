@@ -8,4 +8,13 @@ export const global = css`
   body {
     background-color: skyblue;
   }
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 5px;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #5f99ff;
+    border-radius: 5px;
+  }
 `;

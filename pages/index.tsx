@@ -1,9 +1,12 @@
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { dehydrate } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Seo from "../components/common/Seo";
+import InfiniteContainer from "../components/InfiniteContainer";
+import NumberCountContainer from "../components/NumberCountContainer";
 import { getProfile, useGetProfile } from "../core/api/profile/queries";
+import { getScrollProfile } from "../core/api/scroll/queries";
 import {
   Header,
   HomeContainer,
@@ -17,8 +20,8 @@ const Home: NextPage = () => {
   return (
     <HomeContainer>
       <Seo title="Home" />
-      <Header>프로필</Header>
       <ProfileWrapper>
+        <Header>프로필</Header>
         {List?.map((data) => {
           return (
             <Link
@@ -43,6 +46,8 @@ const Home: NextPage = () => {
           );
         })}
       </ProfileWrapper>
+      <InfiniteContainer />
+      <NumberCountContainer />
     </HomeContainer>
   );
 };
@@ -52,9 +57,12 @@ export default Home;
 export const getStaticProps = async () => {
   try {
     await queryClient.prefetchQuery(["profile"], getProfile);
+    await queryClient.prefetchInfiniteQuery(["scroll"], () =>
+      getScrollProfile(1)
+    );
     return {
       props: {
-        dehydratedState: dehydrate(queryClient),
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
     };
   } catch (error) {

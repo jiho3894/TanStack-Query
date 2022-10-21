@@ -2,12 +2,10 @@ import { dehydrate } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Seo from "../components/common/Seo";
-import instance from "../core/api/axios";
 import {
   getProfileDetail,
   useGetProfileDetail,
 } from "../core/api/profile/queries";
-import { ProfileProps } from "../core/api/profile/types";
 import { InfoWrapper, ProfileContainer } from "../styles/Profile";
 import { queryClient } from "./_app";
 
