@@ -10,6 +10,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
 import { useLoading } from "../hooks/useLoading";
+import Header from "../components/Header";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,7 +34,14 @@ function MyApp({
       <Hydrate state={pageProps.dehydratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Global styles={global} />
-        {loading ? <span>Loading...</span> : <Component {...pageProps} />}
+        {loading ? (
+          <span>Loading...</span>
+        ) : (
+          <>
+            <Header />
+            <Component {...pageProps} />
+          </>
+        )}
       </Hydrate>
     </QueryClientProvider>
   );
