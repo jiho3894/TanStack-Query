@@ -26,3 +26,4 @@ export const getProfile = async () => {
   const res = await instance.get("/profile");
   return res.data;
 };
+

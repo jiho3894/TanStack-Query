@@ -5,6 +5,7 @@ import Link from "next/link";
 import Seo from "../components/common/Seo";
 import InfiniteContainer from "../components/InfiniteContainer";
 import NumberCountContainer from "../components/NumberCountContainer";
+import ThreeModel from "../components/ThreeModel";
 import { getProfile, useGetProfile } from "../core/api/profile/queries";
 import { getScrollProfile } from "../core/api/scroll/queries";
 import {
